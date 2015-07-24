@@ -208,7 +208,7 @@ verify_rsa(XmlElement, SignatureXmlNoNs, X509) ->
   SignatureValBin  = xmldsig_util:mpint(base64:decode(SignatureValue)),
   crypto:rsa_verify(SignatureXmlBin, SignatureValBin, RsaPubKey).
 
--spec get_public_key_rsa(der_encoded()) -> list(binary()).
+-spec get_public_key_rsa(binary()) -> list(binary()).
 
 %% @doc Extract the public_key from a X509 certificate
 %%      Key = [E,N]  E=PublicExponent N=PublicModulusKey
@@ -221,9 +221,3 @@ get_public_key_rsa(X509) ->
                   publicExponent=E}     =
     PublicKey#'OTPSubjectPublicKeyInfo'.subjectPublicKey,
   [crypto:mpint(E), crypto:mpint(N)].
-
-%%%_* Emacs ====================================================================
-%%% Local Variables:
-%%% allout-layout: t
-%%% erlang-indent-level: 2
-%%% End:
